@@ -1,0 +1,40 @@
+<app-navbar 
+  [isLoggedIn]="isLoggedIn()" 
+  [userRole]="userRole()" 
+  [username]="username()" 
+  [changeView]="changeView.bind(this)"
+  (logout)="logout()">
+</app-navbar>
+
+<main>
+  <ng-container [ngSwitch]="view()">
+    <app-home *ngSwitchCase="'home'"
+        [changeView]="changeView.bind(this)">
+    </app-home>
+    <div *ngIf="message()" class="info-message">{{ message() }}</div>
+
+    <app-login
+      *ngSwitchCase="'login'"
+      (login)="onLogin($event)"
+      (showRegister)="onShowRegister()">
+    </app-login>
+
+    <app-register
+      *ngSwitchCase="'register'"
+      (registerSuccess)="onRegisterSuccess($event)"
+      (cancel)="onRegisterCancel()">
+    </app-register>
+
+    <ng-container *ngSwitchCase="'dashboard'">
+      <app-customer-dashboard
+        *ngIf="userRole() === 'customer'"
+        [username]="username()">
+      </app-customer-dashboard>
+      <app-admin-dashboard
+        *ngIf="userRole() === 'admin'">
+      </app-admin-dashboard>
+    </ng-container>
+  </ng-container>
+</main>
+
+<app-footer></app-footer>
