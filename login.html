@@ -1,0 +1,21 @@
+<div class="auth-bg">
+  <section class="login-card">
+    <h2>Login</h2>
+    <form (submit)="onSubmit(); $event.preventDefault()">
+      <label>
+        Username or Email:
+        <input type="text" [(ngModel)]="usernameOrEmail" required />
+      </label>
+      <label>
+        Password:
+        <input type="password" [(ngModel)]="password" required />
+      </label>
+      <button type="submit" [disabled]="loading">Login</button>
+    </form>
+    <div class="register-link">
+      <span>Don't have an account?</span>
+      <a href="#" (click)="showRegister.emit(); $event.preventDefault()">Register</a>
+    </div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+  </section>
+</div>

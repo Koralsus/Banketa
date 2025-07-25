@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <span class="navbar-title"><a href="#" (click)="changeView('home'); $event.preventDefault()"><img src="assets/BanketaNavbar.PNG" alt="Logo"></a></span>
+  <ul class="navbar-links">
+    <li *ngIf="!isLoggedIn" class="dropdown">
+      <button (click)="toggleDropdown()" class="dropdown-toggle">Login ▼</button>
+      <ul class="dropdown-menu" *ngIf="dropdownOpen">
+        <li><a href="#" (click)="changeView('login'); closeDropdown(); $event.preventDefault()">Login</a></li>
+        <li><a href="#" (click)="changeView('register'); closeDropdown(); $event.preventDefault()">Register</a></li>
+      </ul>
+    </li>
+    <li *ngIf="isLoggedIn">
+      <span *ngIf="userRole === 'customer'">Welcome, {{ username }}</span>
+      <span *ngIf="userRole === 'admin'">Admin Panel</span>
+      <button (click)="logout.emit()">Logout</button>
+    </li>
+  </ul>
+</nav>

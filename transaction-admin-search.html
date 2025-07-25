@@ -1,0 +1,49 @@
+<section class="transaction-admin-search">
+  <h3>Transaction Search/Filter</h3>
+  <form (submit)="searchByType(); $event.preventDefault()">
+    <label>Type:
+      <select [(ngModel)]="typeQuery" name="type">
+        <option value="">--Select--</option>
+        <option value="Deposit">Deposit</option>
+        <option value="Withdrawal">Withdrawal</option>
+        <option value="Transfer">Transfer</option>
+      </select>
+    </label>
+    <button type="submit">Search by Type</button>
+  </form>
+  <form (submit)="searchByDate(); $event.preventDefault()">
+    <label>Date (YYYY-MM-DD): <input [(ngModel)]="dateQuery" name="date" /></label>
+    <button type="submit">Search by Date</button>
+  </form>
+  <form (submit)="searchByAmountGreaterThan(); $event.preventDefault()">
+    <label>Amount: <input [(ngModel)]="amountQuery" name="amount" type="number" /></label>
+    <button type="submit">Search by Amount Greater Than</button>
+  </form>
+  <form (submit)="searchByAmountLessThan(); $event.preventDefault()">
+    <label>Amount: <input [(ngModel)]="amountQuery" name="amount" type="number" /></label>
+    <button type="submit">Search by Amount Less Than</button>
+  </form>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="transactions.length > 0">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Type</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tx of transactions">
+        <td>{{ tx.transactionDate | date:'yyyy-MM-dd HH:mm' }}</td>
+        <td>{{ tx.fromAccount?.user?.username || tx.fromAccount?.accountNumber }}</td>
+        <td>{{ tx.toAccount?.user?.username || tx.toAccount?.accountNumber }}</td>
+        <td>{{ tx.transactionType }}</td>
+        <td [class.negative]="tx.amount < 0">&#8369; {{ tx.amount | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

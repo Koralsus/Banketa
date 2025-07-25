@@ -1,0 +1,37 @@
+<div class="auth-bg">
+    <section class="login-card">
+    <h2>Register</h2>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <label>
+        Username:
+        <input type="text" name="username" [(ngModel)]="username" required [disabled]="loading" autocomplete="username" />
+        </label>
+        <label>
+        Email:
+        <input type="email" name="email" [(ngModel)]="email" required [disabled]="loading" autocomplete="email" />
+        </label>
+        <label>
+        Password:
+        <input type="password" name="password" [(ngModel)]="password" required [disabled]="loading" autocomplete="new-password" />
+        </label>
+        <label>
+        First Name:
+        <input type="text" name="firstname" [(ngModel)]="firstname" required [disabled]="loading" autocomplete="given-name" />
+        </label>
+        <label>
+        Middle Name:
+        <input type="text" name="middlename" [(ngModel)]="middlename" [disabled]="loading" autocomplete="additional-name" />
+        </label>
+        <label>
+        Last Name:
+        <input type="text" name="lastname" [(ngModel)]="lastname" required [disabled]="loading" autocomplete="family-name" />
+        </label>
+        <button type="submit" [disabled]="loading || !registerForm.form.valid">
+        Register
+        <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+        <button type="button" (click)="cancel.emit()" [disabled]="loading">Cancel</button>
+    </form>
+    <div *ngIf="error" class="error">{{ error }}</div>
+    </section>
+</div>

@@ -1,0 +1,37 @@
+<div *ngIf="loading" class="loading">
+  Loading accounts...
+</div>
+<div *ngIf="error" class="error">
+  {{ error }}
+</div>
+<div *ngIf="!loading && !error">
+  <h2>Accounts</h2>
+  <table *ngIf="accounts.length > 0" class="accounts-table">
+    <thead>
+      <tr>
+        <th>Account Number</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Balance</th>
+        <th>Owner</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let acc of accounts">
+        <td>{{ acc.accountNumber }}</td>
+        <td>{{ acc.accountType }}</td>
+        <td>{{ acc.user.role === 'ADMIN' ? 'Admin' : 'Customer' }}</td>
+        <td>{{ acc.balance | number: '1.2-2' }}</td>
+        <td>
+          {{ acc.user.username }}
+          <span *ngIf="isAdmin"> ({{ acc.user.email }}) </span>
+        </td>
+        <td>{{ acc.createdAt | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="accounts.length === 0">
+    No accounts found.
+  </div>
+</div>

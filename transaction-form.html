@@ -1,0 +1,11 @@
+<form (submit)="submit(); $event.preventDefault()" class="transaction-form">
+  <label>
+    Recipient Username:
+    <input type="text" [(ngModel)]="recipient" placeholder="Username" required />
+  </label>
+  <label>
+    Amount:
+    <input type="number" [(ngModel)]="amount" placeholder="Amount" required min="1" />
+  </label>
+  <button type="submit">Send</button>
+</form>

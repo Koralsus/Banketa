@@ -1,0 +1,19 @@
+.loading {
+  font-style: italic;
+}
+.error {
+  color: red;
+  margin-bottom: 1em;
+}
+.accounts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.5em;
+  }
+  th {
+    background: #f6f6f6;
+  }
+}

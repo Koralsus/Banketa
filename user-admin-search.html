@@ -1,0 +1,46 @@
+<section class="user-admin-search">
+  <h3>User Search/Filter</h3>
+  <form (submit)="searchByUsername(); $event.preventDefault()">
+    <label>Username: <input [(ngModel)]="usernameQuery" name="username" /></label>
+    <button type="submit">Search by Username</button>
+  </form>
+  <form (submit)="searchByEmail(); $event.preventDefault()">
+    <label>Email: <input [(ngModel)]="emailQuery" name="email" /></label>
+    <button type="submit">Search by Email</button>
+  </form>
+  <form (submit)="searchByFirstname(); $event.preventDefault()">
+    <label>Firstname: <input [(ngModel)]="firstnameQuery" name="firstname" /></label>
+    <button type="submit">Search by Firstname</button>
+  </form>
+  <form (submit)="searchByLastname(); $event.preventDefault()">
+    <label>Lastname: <input [(ngModel)]="lastnameQuery" name="lastname" /></label>
+    <button type="submit">Search by Lastname</button>
+  </form>
+  <form (submit)="searchByCreationDate(); $event.preventDefault()">
+    <label>Creation Date (YYYY-MM-DDTHH:mm:ss): <input [(ngModel)]="creationDateQuery" name="creationDate" /></label>
+    <button type="submit">Search by Creation Date</button>
+  </form>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="users.length > 0">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.firstname }} {{ user.middlename }} {{ user.lastname }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

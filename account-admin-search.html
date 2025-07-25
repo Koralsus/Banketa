@@ -1,0 +1,58 @@
+<section class="account-admin-search">
+  <h3>Account Search/Filter</h3>
+  <form (submit)="searchByAccountNumber(); $event.preventDefault()">
+    <label>Account Number: <input [(ngModel)]="accountNumberQuery" name="accountNumber" /></label>
+    <button type="submit">Search by Account Number</button>
+  </form>
+  <form (submit)="searchByAccountType(); $event.preventDefault()">
+    <label>Account Type:
+      <select [(ngModel)]="accountTypeQuery" name="accountType">
+        <option value="">--Select--</option>
+        <option value="SAVINGS">Savings</option>
+        <option value="CHECKING">Checking</option>
+        <option value="CHECKING">Time Deposit</option>
+        <option value="CHECKING">Foreign Currency</option>
+      </select>
+    </label>
+    <button type="submit">Search by Account Type</button>
+  </form>
+  <form (submit)="searchByAccountStatus(); $event.preventDefault()">
+    <label>Account Status:
+      <select [(ngModel)]="accountStatusQuery" name="accountStatus">
+        <option value="">--Select--</option>
+        <option value="ACTIVE">Active</option>
+        <option value="INACTIVE">Inactive</option>
+      </select>
+    </label>
+    <button type="submit">Search by Status</button>
+  </form>
+  <form (submit)="searchByCreationDate(); $event.preventDefault()">
+    <label>Creation Date (YYYY-MM-DDTHH:mm:ss): <input [(ngModel)]="creationDateQuery" name="creationDate" /></label>
+    <button type="submit">Search by Creation Date</button>
+  </form>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="accounts.length > 0">
+    <thead>
+      <tr>
+        <th>Account #</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Balance</th>
+        <th>Created At</th>
+        <th>User</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let acc of accounts">
+        <td>{{ acc.accountNumber }}</td>
+        <td>{{ acc.accountType }}</td>
+        <td>{{ acc.accountStatus }}</td>
+        <td>&#8369; {{ acc.balance | number:'1.2-2' }}</td>
+        <td>{{ acc.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+        <td>{{ acc.user.username }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
